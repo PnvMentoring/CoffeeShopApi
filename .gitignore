@@ -5,3 +5,4 @@ riderModule.iml
 /_ReSharper.Caches/
 .idea
 CoffeeShopApi.sln.DotSettings.user
+/appsettings.Development.json

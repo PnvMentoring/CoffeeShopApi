@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CoffeeShopApi.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShopApi.Data;
+namespace CoffeeShopApi.Database;
 
 public class CoffeeShopDbContext : DbContext
 {
