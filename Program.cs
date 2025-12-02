@@ -1,11 +1,17 @@
+using CoffeeShopApi.Database;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+
+var connectionString = builder.Configuration.GetConnectionString("DbConnectionStr");
+builder.Services.AddDbContext<CoffeeShopDbContext>(options =>
+    options.UseMySql(connectionString, 
+        ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 
