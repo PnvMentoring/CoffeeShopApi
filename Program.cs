@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
-var connectionStr = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DbConnectionStr");
 builder.Services.AddDbContext<CoffeeShopDbContext>(options =>
-    options.UseMySql(connectionStr, 
-        ServerVersion.AutoDetect(connectionStr)));
+    options.UseMySql(connectionString, 
+        ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 
