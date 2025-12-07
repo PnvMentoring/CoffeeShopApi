@@ -5,7 +5,8 @@ namespace CoffeeShopApi.Dtos;
 
 public class HireEmployeeResponse
 {
-    [MaxLength(100)] 
+    public required string Id { get; init; }
+    
     public required string FullName { get; init; }
     
     public required EmployeePosition Position { get; init; }

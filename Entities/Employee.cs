@@ -8,7 +8,7 @@ public class Employee : BaseEntity
     public required string FullName { get; set; }
 
     [MaxLength(50)] 
-    public required EmployeePosition Position { get; init; }
+    public required EmployeePosition Position { get; set; }
 }
 
 public enum EmployeePosition

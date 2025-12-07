@@ -28,17 +28,16 @@ public class EmployeesController : BaseController
         _dbDbContext.Employees.Add(employee);
         await _dbDbContext.SaveChangesAsync();
 
-        var response = new HireEmployeeResponse
-        {
-            FullName = employee.FullName,
-            Position = employee.Position,
-        };
-
         // 3. Returns results
         return Created($"/api/employees/{employee.Id}", new
         {
             message = "Employee hired successfully",
-            employee = response
+            employee = new HireEmployeeResponse
+            {
+                Id = employee.Id,
+                FullName = employee.FullName,
+                Position = employee.Position,
+            }
         });
     }
 }
