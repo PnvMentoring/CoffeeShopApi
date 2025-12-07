@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopApi.Migrations
 {
     [DbContext(typeof(CoffeeShopDbContext))]
-    [Migration("20251207062158_CreateEmployeesTable")]
+    [Migration("20251207122920_CreateEmployeesTable")]
     partial class CreateEmployeesTable
     {
         /// <inheritdoc />
@@ -34,10 +34,8 @@ namespace CoffeeShopApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

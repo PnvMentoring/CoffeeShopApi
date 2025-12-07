@@ -21,8 +21,7 @@ namespace CoffeeShopApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FullName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Position = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Position = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -9,5 +9,7 @@ public class CoffeeShopDbContext : DbContext
         : base(options)
     {
     }
-    public DbSet<Employee> Employees { get; set; }
+
+    public required DbSet<Employee> Employees { get; set; }
+    
 }

@@ -9,6 +9,6 @@ Content-Type: application/json
 
 {
   "fullName": "Nguyen Van A",
-  "position": "Barista"
+  "position": 0
 }
 ###
