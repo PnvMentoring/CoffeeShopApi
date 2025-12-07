@@ -10,6 +10,6 @@ public class CoffeeShopDbContext : DbContext
     {
     }
 
-    public required DbSet<Employee> Employees { get; set; }
+    public required DbSet<Employee> Employees { get; init; }
     
 }

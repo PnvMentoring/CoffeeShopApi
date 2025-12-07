@@ -7,37 +7,38 @@ namespace CoffeeShopApi.Controllers;
 
 public class EmployeesController : BaseController
 {
-    private readonly CoffeeShopDbContext _dbContext;
+    private readonly CoffeeShopDbContext _dbDbContext;
 
-    public EmployeesController(CoffeeShopDbContext context)
+    public EmployeesController(CoffeeShopDbContext dbContext)
     {
-        _dbContext = context;
+        _dbDbContext = dbContext;
     }
 
     [HttpPost("hire")]
-    public async Task<IActionResult> HireEmployee([FromBody] HireEmployeeDto hireDto)
+    public async Task<ActionResult<HireEmployeeResponse>> HireEmployee([FromBody] HireEmployeeRequest hireRequest)
     {
         // 1. Create new employee
         var employee = new Employee
         {
-            FullName = hireDto.FullName,
-            Position = hireDto.Position
+            FullName = hireRequest.FullName,
+            Position = hireRequest.Position
         };
-
+   
         // 2. Save to database
-        _dbContext.Employees.Add(employee);
-        await _dbContext.SaveChangesAsync();
+        _dbDbContext.Employees.Add(employee);
+        await _dbDbContext.SaveChangesAsync();
+
+        var response = new HireEmployeeResponse
+        {
+            FullName = employee.FullName,
+            Position = employee.Position,
+        };
 
         // 3. Returns results
         return Created($"/api/employees/{employee.Id}", new
         {
             message = "Employee hired successfully",
-            employee = new
-            {
-                id = employee.Id,
-                fullName = employee.FullName,
-                position = employee.Position.ToString()
-            }
+            employee = response
         });
     }
 }
