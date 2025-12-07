@@ -3,4 +3,12 @@
 GET {{CoffeeShopApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
+### Test Hire Employee API
+POST {{CoffeeShopApi_HostAddress}}/api/employees/hire
+Content-Type: application/json
+
+{
+  "fullName": "Nguyen Van A",
+  "position": 0
+}
 ###
