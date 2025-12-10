@@ -24,14 +24,15 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
 
         return Created("",
             new
-            {  message = "Employee hired successfully",
-                employee = new AddProductResponse
             {
-                Id = product.Id,
-                ProductName = product.Name,
-                Price = product.Price,
-                Category = product.Category
-            }
-        });
+                message = "Employee hired successfully",
+                employee = new AddProductResponse
+                {
+                    Id = product.Id,
+                    ProductName = product.Name,
+                    Price = product.Price,
+                    Category = product.Category
+                }
+            });
     }
 }
