@@ -12,4 +12,5 @@ public class CoffeeShopDbContext : DbContext
 
     public required DbSet<Employee> Employees { get; init; }
     public required DbSet<Product> Products { get; init; }
+    public DbSet<Category> Categories { get; set; } 
 }

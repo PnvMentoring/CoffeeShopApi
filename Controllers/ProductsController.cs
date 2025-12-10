@@ -3,6 +3,7 @@ using CoffeeShopApi.Dtos.Request;
 using CoffeeShopApi.Dtos.Response;
 using CoffeeShopApi.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShopApi.Controllers;
 
@@ -12,11 +13,19 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
     public async Task<ActionResult<AddProductResponse>> AddProduct(
         [FromBody] AddProductRequest request)
     {
+        var category = await dbContext.Categories
+            .FirstOrDefaultAsync(c => c.Id == request.CategoryId);
+        
+        if (category == null)
+        {
+            return NotFound(new { message = "Category not found" });
+        }
         var product = new Product
         {
             Name = request.ProductName,
             Price = request.Price,
-            Category = request.Category
+            CategoryId = request.CategoryId,
+            Category = category
         };
 
         dbContext.Products.Add(product);
@@ -25,7 +34,7 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
         return Created("",
             new
             {
-                message = "Employee hired successfully",
+                message = "Add Product successfully",
                 employee = new AddProductResponse
                 {
                     Id = product.Id,

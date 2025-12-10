@@ -2,9 +2,8 @@
 
 namespace CoffeeShopApi.Entities;
 
-public class Category
+public class Category : BaseEntity
 {
-    public int Id { get; set; }
     
     [MaxLength(50)]
     public required string Name { get; set; }
