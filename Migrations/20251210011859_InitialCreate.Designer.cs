@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopApi.Migrations
 {
     [DbContext(typeof(CoffeeShopDbContext))]
-    [Migration("20251209065330_CreateProductsTable")]
-    partial class CreateProductsTable
+    [Migration("20251210011859_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,24 @@ namespace CoffeeShopApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("CoffeeShopApi.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
 
             modelBuilder.Entity("CoffeeShopApi.Entities.Employee", b =>
                 {
@@ -48,22 +66,33 @@ namespace CoffeeShopApi.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("CoffeeShopApi.Entities.Product", b =>
+                {
+                    b.HasOne("CoffeeShopApi.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,10 +1,12 @@
-﻿namespace CoffeeShopApi.Dtos.Request;
+﻿using CoffeeShopApi.Entities;
+
+namespace CoffeeShopApi.Dtos.Request;
 
 public class AddProductRequest
 {
     public required string ProductName { get; init; }
 
-    public int Price { get; init; }
+    public decimal Price { get; init; }
 
-    public required string Category { get; init; }
+    public required Category Category { get; init; }
 }

@@ -6,10 +6,10 @@ namespace CoffeeShopApi.Entities;
 public class Product : BaseEntity
 {
     [MaxLength(200)] 
-    public required string ProductName { get; set; }
-
-    public int Price { get; set; }
-
-    [MaxLength(50)] 
-    public required string Category { get; set; }
+    public required string Name { get; set; }
+    
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal Price { get; set; }
+    
+    public required Category Category { get; set; }
 }

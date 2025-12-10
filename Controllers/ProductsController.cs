@@ -8,13 +8,13 @@ namespace CoffeeShopApi.Controllers;
 
 public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
 {
-    [HttpPost("addproduct")]
+    [HttpPost("add")]
     public async Task<ActionResult<AddProductResponse>> AddProduct(
         [FromBody] AddProductRequest request)
     {
         var product = new Product
         {
-            ProductName = request.ProductName,
+            Name = request.ProductName,
             Price = request.Price,
             Category = request.Category
         };
@@ -22,13 +22,16 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
         dbContext.Products.Add(product);
         await dbContext.SaveChangesAsync();
 
-        return Created($"/api/products/{product.Id}",
-            new AddProductResponse
+        return Created("",
+            new
+            {  message = "Employee hired successfully",
+                employee = new AddProductResponse
             {
                 Id = product.Id,
-                ProductName = product.ProductName,
+                ProductName = product.Name,
                 Price = product.Price,
                 Category = product.Category
-            });
+            }
+        });
     }
 }
