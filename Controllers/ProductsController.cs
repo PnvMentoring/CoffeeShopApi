@@ -15,16 +15,16 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
     {
         var category = await dbContext.Categories
             .FirstOrDefaultAsync(c => c.Id == request.CategoryId);
-        
+
         if (category == null)
         {
-            return NotFound(new { message = "Category not found" });
+            return BadRequest(new { message = "Category not found" });
         }
+
         var product = new Product
         {
-            Name = request.ProductName,
+            Name = request.Name,
             Price = request.Price,
-            CategoryId = request.CategoryId,
             Category = category
         };
 
@@ -38,7 +38,7 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
                 employee = new AddProductResponse
                 {
                     Id = product.Id,
-                    ProductName = product.Name,
+                    Name = product.Name,
                     Price = product.Price,
                     Category = product.Category
                 }

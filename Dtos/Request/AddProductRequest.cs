@@ -4,9 +4,9 @@ namespace CoffeeShopApi.Dtos.Request;
 
 public class AddProductRequest
 {
-    public required string ProductName { get; init; }
+    public required string Name { get; init; }
 
-    public decimal Price { get; init; }
+    public required decimal Price { get; init; }
 
     public required string CategoryId { get; init; }
 }

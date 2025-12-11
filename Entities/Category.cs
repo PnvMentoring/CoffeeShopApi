@@ -6,5 +6,5 @@ public class Category : BaseEntity
 {
     
     [MaxLength(50)]
-    public required string Name { get; set; }
+    public required string Name { get; init; }
 }
