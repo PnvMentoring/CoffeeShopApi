@@ -6,8 +6,7 @@ public class Employee : BaseEntity
 {
     [MaxLength(100)] 
     public required string FullName { get; set; }
-
-    [MaxLength(50)] 
+    
     public required EmployeePosition Position { get; set; }
 }
 

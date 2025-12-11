@@ -3,6 +3,7 @@ using CoffeeShopApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopApi.Migrations
 {
     [DbContext(typeof(CoffeeShopDbContext))]
-    partial class CoffeeShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251210011859_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +26,11 @@ namespace CoffeeShopApi.Migrations
 
             modelBuilder.Entity("CoffeeShopApi.Entities.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -33,7 +39,7 @@ namespace CoffeeShopApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("CoffeeShopApi.Entities.Employee", b =>
@@ -47,6 +53,7 @@ namespace CoffeeShopApi.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<int>("Position")
+                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -59,9 +66,8 @@ namespace CoffeeShopApi.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
