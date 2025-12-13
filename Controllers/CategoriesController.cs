@@ -1,0 +1,36 @@
+﻿// CategoriesController.cs
+using CoffeeShopApi.Database;
+using CoffeeShopApi.Dtos.Request;
+using CoffeeShopApi.Dtos.Response;
+using CoffeeShopApi.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace CoffeeShopApi.Controllers;
+
+public class CategoriesController(CoffeeShopDbContext dbContext) : BaseController
+{
+    [HttpPost("add")]
+    public async Task<ActionResult<AddCategoryResponse>> AddCategory(
+        [FromBody] AddCategoryRequest request)
+    {
+        var category = new Category
+        {
+            Name = request.Name
+        };
+
+        dbContext.Categories.Add(category);
+        await dbContext.SaveChangesAsync();
+
+        return Created("",
+            new
+            {
+                message = "Add Category successfully",
+                category = new AddCategoryResponse
+                {
+                    Id = category.Id,
+                    Name = category.Name
+                }
+            });
+    }
+}

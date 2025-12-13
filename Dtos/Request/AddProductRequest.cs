@@ -8,5 +8,5 @@ public class AddProductRequest
 
     public required decimal Price { get; init; }
 
-    public required string CategoryId { get; init; }
+    public required string CategoryName { get; init; }
 }

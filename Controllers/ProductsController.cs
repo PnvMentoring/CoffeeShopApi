@@ -14,7 +14,7 @@ public class ProductsController(CoffeeShopDbContext dbContext) : BaseController
         [FromBody] AddProductRequest request)
     {
         var category = await dbContext.Categories
-            .FirstOrDefaultAsync(c => c.Id == request.CategoryId);
+            .FirstOrDefaultAsync(c => c.Name == request.CategoryName);
 
         if (category == null)
         {
