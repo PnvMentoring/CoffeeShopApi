@@ -14,10 +14,14 @@
 - `price`
 - `category`
 
+### **Category**
+- `id` (Primary Key)
+- `category_name`
+
 #### **Customers**
 - `id` (Primary Key)
-- `full_name`
-- `phone_number`
+- `name`
+- `note`
 
 #### **Orders**
 - `id` (Primary Key)
